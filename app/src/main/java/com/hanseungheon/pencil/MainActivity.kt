@@ -29,13 +29,6 @@ class MainActivity : AppCompatActivity() {
         binding=DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.activity=this
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val item= arrayListOf("사과", "바나나")
-        val adapter=ArrayAdapter(this, android.R.layout.simple_list_item_1, item)
-        binding.listView.adapter=adapter
-        binding.button.setOnClickListener {
-            adapter.add("키위")
-            adapter.notifyDataSetChanged()
-        }
 
         val person=Person("한승헌", 0, true)
         Log.d(person.name, person.eat("밥").toString())
@@ -48,11 +41,12 @@ class MainActivity : AppCompatActivity() {
         student.think("나는 한승헌이다")
         student.study("정보")
 
+        val person2=Person("이지은", 1, true)
+        val person3 = Person("신사임당", 1, false)
 
+        val list = listOf(person, student, person2, person3)
 
-
-
-
+        binding.recyclerView.adapter = RecyclerViewAdapter(list)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
